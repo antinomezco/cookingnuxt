@@ -336,6 +336,9 @@ export default {
       setTimeout(this.redirect, 2000);
     },
     async deleteRecipe() {
+      if(this.CryptoJS.SHA1(this.$auth.user.sub).toString() != this.correctUser){
+      return alert("Cannot edit other user's recipes")
+      }
       await this.$axios.$delete("/edit/recipe/" + this.formData.slug + "/");
       this.snackbarMessage = "Recipe has been edited successfully"
       setTimeout(this.$router.replace({ path: "/"}), 2000);
