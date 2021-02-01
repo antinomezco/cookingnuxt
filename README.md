@@ -1,10 +1,10 @@
 # cookingnuxt
 
-Simple recipe repository using VueJS as a frontend, Django as a backend using PostgresQL as the database.
+Simple recipe repository using VueJS as a frontend, Django as a backend using PostgresQL through Axios.
 
 Users without accounts can browse the available recipes, being able to search by recipe name, cuisine, course and/or by username.
 
-Users with accounts can add/edit/delete recipes.
+Users with accounts can also add/edit/delete recipes.
 
 ## Build Setup
 
