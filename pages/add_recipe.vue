@@ -157,12 +157,18 @@
       <v-btn @click="clear"> clear </v-btn>
     </form>
   </validation-observer>
-  <v-snackbar
-      v-model="snackbar"
-      :timeout="timeout"
+  <v-overlay
+      :z-index="zIndex"
+      :value="overlay"
     >
-      Recipe Added
-    </v-snackbar>
+      <v-btn
+        class="white--text"
+        color="purple"
+        @click="adduser"
+      >
+        Click here to add your recipe username before proceeding
+      </v-btn>
+    </v-overlay>
   </div>
 </template>
 
@@ -240,9 +246,35 @@ export default {
       //
       snackbar: false,
       timeout: 2000,
+      snackMessage: "",
+      overlay: false
     };
   },
   methods: {
+    async adduser() {
+      try {
+        console.log("antes");
+        console.log(this.CryptoJS.SHA1(this.$auth.user.sub).toString());
+        await this.$axios.$post("/user_add/", {
+          email: this.$auth.user.email,
+          sub: this.CryptoJS.SHA1(this.$auth.user.sub).toString(),
+        });
+        // add {userid: this.$auth.identities.user_id}
+        console.log("despues");
+        console.log(this.formData);
+        this.$router.replace({
+          name: "edit-user-sub",
+          params: { sub: this.CryptoJS.SHA1(this.$auth.user.sub).toString() },
+        });
+      } catch (e) {
+        // console.log("User already in database");
+        this.$router.replace({
+          name: "edit-user-sub",
+          params: { sub: this.CryptoJS.SHA1(this.$auth.user.sub) },
+        });
+        // setTimeout(this.$router.replace({ path: "/" }), 1000)
+      }
+    },
     submit() {
       this.$refs.observer.validate();
     },
@@ -290,6 +322,7 @@ export default {
     },
     async postRecipe() {
       await this.$axios.$post("/add_recipe/", this.formData);
+      this.snackMessage = "Recipe Added"
       this.snackbar = true
       setTimeout(this.redirect, 2000);
     },
@@ -329,6 +362,16 @@ export default {
     },
   },
   async created() {
+
+    try{
+      let preUser = await this.$axios.$get("/edit/user/" + this.CryptoJS.SHA1(this.$auth.user.sub).toString());
+      console.log("preUser");
+      console.log(preUser.id);
+      this.formData.user = preUser.id;
+    } catch {
+      this.overlay = true
+    }
+    
     
     let preCuisine = await this.$axios.$get("/allcuisines");
     console.log("preCuisine");
@@ -347,10 +390,7 @@ export default {
     console.log(preCourses);
     this.courseList = preCourses;
 
-    let preUser = await this.$axios.$get("/edit/user/" + this.CryptoJS.SHA1(this.$auth.user.sub).toString());
-    console.log("preUser");
-    console.log(preUser.id);
-    this.formData.user = preUser.id;
+    
   },
 };
 </script>
