@@ -48,7 +48,7 @@
       </v-container>
     </v-main>
     <v-footer :absolute="!fixed" app>
-      <span>Constantino Saldana &copy; {{ new Date().getFullYear() }}</span>
+      <span>C. Saldana &copy; {{ new Date().getFullYear() }}</span>
     </v-footer>
   </v-app>
 </template>
