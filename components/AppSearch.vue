@@ -402,7 +402,7 @@ export default {
       pagination: {},
       sortBy: "recipe_name",
       itemsPerPage: 8,
-      itemsPerPageArray: [4, 8, 12],
+      itemsPerPageArray: [8, 12],
       search: "",
       filter: {},
       sortDesc: false,
@@ -533,18 +533,18 @@ export default {
         "&cuisine_name=" + this.cuisineFilterValue +
         "&course_name=" + this.courseFilterValue +
         "&sub="+ this.userFilterValue +
-        "&approved=True" 
+        "&approved=True" + 
         // "&region=" +
         // this.CourseFilterValue +
         // "&category=" +
         // this.IngredientFilterValue +
-        // "&size=" +
-        // itemsPerPage +
-        // "&page=" +
-        // page +
-        // "&sortBy=" +
-        // sortDesc +
-        // sortBy
+        "&size=" +
+        itemsPerPage +
+        "&page=" +
+        page +
+        "&sortBy=" +
+        sortDesc +
+        sortBy
       );
       console.log(items);
       this.totalRecipes = items.count;

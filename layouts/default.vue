@@ -23,17 +23,24 @@
     </v-navigation-drawer> -->
     <v-app-bar :clipped-left="clipped" fixed app>
       <!-- <v-app-bar-nav-icon @click.stop="drawer = !drawer" /> -->
-      <v-btn to="/" router exact text> Recipe Search </v-btn>
-      <v-btn v-if="$auth.loggedIn" to="/add_recipe" router exact text>
+      <v-spacer />
+      <v-btn to="/" router exact  plain> Recipe Search </v-btn>
+      <v-btn v-if="$auth.loggedIn" to="/add_recipe" router exact  plain>
         Add Recipe
       </v-btn>
-      <v-spacer />
-      <a v-if="$auth.loggedIn" @click="$auth.logout()">Sign Out</a>
-      <a v-else @click="$auth.loginWith('auth0')">Sign In</a>
-
       <div v-if="user">
-        <v-list-item @click="adduser">{{ this.user.email }}</v-list-item>
+        <v-btn @click="adduser" plain>User settings</v-btn>
       </div>
+      <v-spacer />
+      <v-spacer />
+      <v-spacer />
+      <v-spacer />
+      <v-spacer />
+      <v-spacer />
+      <v-spacer />
+      <v-btn v-if="$auth.loggedIn" plain><a @click="$auth.logout()">Sign Out</a></v-btn>
+      <v-btn v-else plain><a  @click="$auth.loginWith('auth0')">Sign In</a></v-btn>
+      <v-spacer />
     </v-app-bar>
     <v-main>
       <v-container>
