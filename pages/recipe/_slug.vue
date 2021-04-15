@@ -3,7 +3,7 @@
     <v-card class="mx-auto my-12" :width="width">
       <div>
         <v-img
-          class="white--text justify-start"
+          class="white--text justify-start rounded-t-lg"
           max-height="400"
           width="100%"
           :src="items.image"
@@ -25,14 +25,14 @@
           >
             {{ items.course.course_name }}
           </v-toolbar>
-          
-          <v-card-title class="align-start">{{ items.recipe_name }} </v-card-title>
         </v-img>
       </div>
-
-      
-
+      <hr>
       <v-card-text>
+        <v-card-title class="justify-center text-h3"
+            >{{ items.recipe_name }}
+          </v-card-title>
+            <hr>
         <!-- <v-row align="center" class="mx-0">
           <v-rating
             :value="4.5"
@@ -45,51 +45,68 @@
 
           <div class="grey--text ml-4">4.5 (413)</div>
         </v-row> --><v-btn
-            v-if="this.$auth.user && this.CryptoJS.SHA1(this.$auth.user.sub).toString()=== items.user.sub"
-            color="white"
-            min-width="50"
-            
-            height="35"
-            :to="'/edit/recipe/'+ items.slug"
-            floating
-            class="black--text"
-          >
-            Edit Recipe
-          </v-btn>
+          v-if="
+            this.$auth.user &&
+            this.CryptoJS.SHA1(this.$auth.user.sub).toString() ===
+              items.user.sub
+          "
+          color="white"
+          min-width="50"
+          height="35"
+          :to="'/edit/recipe/' + items.slug"
+          floating
+          class="black--text"
+        >
+          Edit Recipe
+        </v-btn>
 
-        <div class="subtitle-1 font-weight-black">Prep time:</div>
-        <div class="subtitle-1">{{ items.prep_time }}</div>
+        <div class="d-flex justify-space-between my-3">
+          <div class="my-2"></div>
 
-        <div class="my-2"></div>
+          <div class="subtitle-1 font-weight-black">Prep time:</div>
+          <div class="subtitle-1">{{ items.prep_time }}</div>
+          <div class="my-2"></div>
+          <div class="my-2"></div>
+          <div class="my-2"></div>
+          <div class="subtitle-1 font-weight-black">Cook time:</div>
+          <div class="subtitle-1">{{ items.cook_time }}</div>
 
-        <div class="subtitle-1 font-weight-black">Cook time:</div>
-        <div class="subtitle-1">{{ items.cook_time }}</div>
-
-        <div class="my-2"></div>
-
-        <div class="subtitle-1 font-weight-black">Yields:</div>
-        <div class="subtitle-1">{{ items.servings }} servings</div>
+          <!-- <div class="my-2"></div> -->
+          <div class="my-2"></div>
+          <div class="my-2"></div>
+          <div class="my-2"></div>
+          <div class="subtitle-1 font-weight-black">Yields:</div>
+          <div class="subtitle-1">{{ items.servings }} servings</div>
+          <div class="my-2"></div>
+        </div>
 
         <div class="my-2"></div>
 
         <v-divider class="mx-4" v-show="items.recipe_description"></v-divider>
 
-        <v-card-title v-show="items.recipe_description">Recipe description: </v-card-title>
-        <p class="subtitle-1" v-show="items.recipe_description">{{ items.recipe_description }}</p>
+        <v-card-title v-show="items.recipe_description"
+          >Recipe description:
+        </v-card-title>
+        <p class="subtitle-1 px-7" v-show="items.recipe_description">
+          {{ items.recipe_description }}
+        </p>
 
         <v-divider class="mx-4"></v-divider>
 
         <v-card-title>Ingredients: </v-card-title>
-        
-        <p v-for="ing in items.ingredients_text.split('\r\n')" :key="ing">{{ ing }}</p>
+
+        <p v-for="ing in items.ingredients_text.split('\r\n')" :key="ing" class="px-7 font-weight-medium">
+          {{ ing }}
+        </p>
 
         <v-divider class="mx-4"></v-divider>
 
         <v-card-title>Directions: </v-card-title>
-        <p v-for="dir in items.recipe_steps.split('\r\n')" :key="dir">{{ dir }}</p>
+        <p v-for="dir in items.recipe_steps.split('\r\n')" :key="dir" class="pl-7 pr-9 font-weight-medium">
+          {{ dir }}
+        </p>
       </v-card-text>
     </v-card>
-    
   </div>
 </template>
 
@@ -149,7 +166,7 @@ export default {
   async asyncData({ params, $axios }) {
     const slug = params.slug; // When calling /abc the slug will be "abc"
     let items = await $axios.$get("/recipe/" + slug);
-    console.log(items)
+    console.log(items);
     items = items;
     console.log("items");
     console.log(items);
@@ -165,3 +182,10 @@ export default {
   // },
 };
 </script>
+
+<style scoped>
+#pcs {
+  display: flex;
+  justify-content: space-between;
+}
+</style>
