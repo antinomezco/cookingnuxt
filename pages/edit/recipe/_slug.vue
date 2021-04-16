@@ -3,6 +3,7 @@
     Cannot edit this recipe, redirecting
   </div> -->
   <div>
+    <v-card class="mx-auto my-12 px-10 py-10" :width="width">
   <validation-observer
     ref="observer"
     v-slot="{ invalid, handleSubmit }"
@@ -161,6 +162,7 @@
     >
       {{snackbarMessage}}
     </v-snackbar>
+    </v-card>
   </div>
 </template>
 

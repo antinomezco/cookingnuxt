@@ -1,6 +1,5 @@
 <template>
   <div style="margin: 1%">
-    
     <v-container fluid>
       <v-data-iterator
         :items="items"
@@ -127,7 +126,7 @@
                 height="100%"
                 outlined
                 color="#1d1d1d"
-                nuxt          
+                nuxt
                 :to="{
                   name: 'recipe-slug',
                   params: {
@@ -142,7 +141,6 @@
                   width="350"
                   :src="recipe.image"
                   :lazy-src="require(`@/assets/placeholder.jpg`)"
-                  
                 >
                   <v-toolbar
                     color="yellow"
@@ -169,14 +167,12 @@
                     </v-row>
                   </template>
                   <!-- fix src -->
-                  <v-card-title
-                  class="align-end"
-                  style="word-break: break-word"
-                  >{{ recipe.recipe_name }}</v-card-title
-                >
+                  <v-card-title class="text-h5 font-weight-bold" style="margin-top: 10%; -webkit-text-stroke: 1px black;">{{
+                    recipe.recipe_name
+                  }}</v-card-title>
                 </v-img>
                 <!-- <hr /> -->
-                
+
                 <!-- <v-card-subtitle class="pb-0">
                   <div
                     class="white--text"
@@ -528,23 +524,27 @@ export default {
       // console.log(this.currentPage);
       page = this.page;
       let items = await this.$axios.$get(
-        "/filterrecipes?" + 
-        "recipe_name=" + this.recipeFilterValue +
-        "&cuisine_name=" + this.cuisineFilterValue +
-        "&course_name=" + this.courseFilterValue +
-        "&sub="+ this.userFilterValue +
-        "&approved=True" + 
-        // "&region=" +
-        // this.CourseFilterValue +
-        // "&category=" +
-        // this.IngredientFilterValue +
-        "&size=" +
-        itemsPerPage +
-        "&page=" +
-        page +
-        "&sortBy=" +
-        sortDesc +
-        sortBy
+        "/filterrecipes?" +
+          "recipe_name=" +
+          this.recipeFilterValue +
+          "&cuisine_name=" +
+          this.cuisineFilterValue +
+          "&course_name=" +
+          this.courseFilterValue +
+          "&sub=" +
+          this.userFilterValue +
+          "&approved=True" +
+          // "&region=" +
+          // this.CourseFilterValue +
+          // "&category=" +
+          // this.IngredientFilterValue +
+          "&size=" +
+          itemsPerPage +
+          "&page=" +
+          page +
+          "&sortBy=" +
+          sortDesc +
+          sortBy
       );
       console.log(items);
       this.totalRecipes = items.count;
@@ -554,7 +554,7 @@ export default {
   },
   async created() {
     //this.getPosition() //map stuff
-    
+
     this.tempRecipeFilterValue = "";
     this.recipeFilterValue = "";
     // let preIngredients = await this.$axios.$get("/allfoodcategories");
@@ -596,6 +596,10 @@ export default {
 }
 .autoheight {
   height: auto;
+}
+
+.v-card__text, .v-card__title {
+  word-break: normal; /* maybe !important  */
 }
 
 @media only screen and (min-device-width: 1262px) and (max-device-width: 1740px) {

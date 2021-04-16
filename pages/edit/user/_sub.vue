@@ -1,4 +1,5 @@
 <template>
+<v-card class="mx-auto my-12 px-10 py-10" :width="width">
   <validation-observer ref="observer" v-slot="{ invalid, handleSubmit }">
     <form @submit.prevent="handleSubmit(onSubmit)">
       <validation-provider
@@ -28,6 +29,7 @@
       <!-- <v-btn @click="clear"> clear </v-btn> -->
     </form>
   </validation-observer>
+</v-card>
 </template>
 
 <script>

@@ -1,5 +1,6 @@
 <template>
 <div>
+  <v-card class="mx-auto my-12 px-10 py-10" :width="width">
   <validation-observer ref="observer" v-slot="{ invalid, handleSubmit }">
     <form @submit.prevent="handleSubmit(onSubmit)">
       <validation-provider
@@ -169,6 +170,7 @@
         Click here to add your recipe username before proceeding
       </v-btn>
     </v-overlay>
+  </v-card>
   </div>
 </template>
 
