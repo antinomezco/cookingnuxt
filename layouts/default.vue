@@ -23,7 +23,7 @@
     </v-navigation-drawer> -->
     <v-app-bar :clipped-left="clipped" fixed app>
       <div class="text-center">
-        <v-dialog overlay-opacity=".95" v-model="dialog" width="500">
+        <v-dialog overlay-opacity=".98" v-model="dialog" width="500">
           <template v-slot:activator="{ on, attrs }">
             <v-btn   dark icon plain v-bind="attrs" v-on="on">
               <v-icon dark> mdi-menu </v-icon>
