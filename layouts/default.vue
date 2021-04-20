@@ -25,34 +25,34 @@
       <div class="text-center">
         <v-dialog overlay-opacity=".98" v-model="dialog" width="500">
           <template v-slot:activator="{ on, attrs }">
-            <v-btn   dark icon plain v-bind="attrs" v-on="on">
+            <v-btn class="d-lg-none" dark icon plain v-bind="attrs" v-on="on">
               <v-icon dark> mdi-menu </v-icon>
             </v-btn>
           </template>
           <v-list-item>
             <v-list-item-content>
-              <v-btn to="/" router exact plain> Recipe Search </v-btn>
+              <v-btn to="/" router exact plain @click="dialog = false"> Recipe Search </v-btn>
             </v-list-item-content>
           </v-list-item>
 
           <v-list-item  v-if="$auth.loggedIn">
             <v-list-item-content>
-              <v-btn to="/add_recipe" router exact plain> Add Recipe </v-btn>
+              <v-btn to="/add_recipe" router exact plain @click="dialog = false"> Add Recipe </v-btn>
             </v-list-item-content>
           </v-list-item>
 
           <v-list-item  v-if="user">
             <v-list-item-content>
-                <v-btn @click="adduser" plain>User settings</v-btn>
+                <v-btn @click="adduser; dialog = false" plain>User settings</v-btn>
             </v-list-item-content>
           </v-list-item>
           <v-list-item>
             <v-list-item-content>
               <v-btn v-if="$auth.loggedIn" plain
-                ><a @click="$auth.logout()">Sign Out</a></v-btn
+                ><a @click="$auth.logout(); dialog = false">Sign Out</a></v-btn
               >
               <v-btn v-else plain
-                ><a @click="$auth.loginWith('auth0')">Sign In</a></v-btn
+                ><a @click="$auth.loginWith('auth0'); dialog = false">Sign In</a></v-btn
               >
             </v-list-item-content>
           </v-list-item>
@@ -83,7 +83,7 @@
       </div>
       <!-- <v-app-bar-nav-icon @click.stop="drawer = !drawer" /> -->
       <v-spacer />
-      <v-btn to="/" class="d-none d-lg-block" router exact plain> Recipe Search </v-btn>
+      <v-btn to="/" class="d-none d-lg-block" style="height: auto" router exact plain> Recipe Search </v-btn>
       <v-btn class="d-none d-lg-block" v-if="$auth.loggedIn" to="/add_recipe" router exact plain>
         Add Recipe
       </v-btn>
@@ -130,6 +130,7 @@ export default {
     return {
       clipped: false,
       drawer: false,
+      dialog: false,
       fixed: true,
       items: [
         {

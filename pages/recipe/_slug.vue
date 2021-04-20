@@ -27,12 +27,14 @@
           </v-toolbar>
         </v-img>
       </div>
-      <hr>
+      <hr />
       <v-card-text>
-        <v-card-title class="justify-center text-h3"
-            >{{ items.recipe_name }}
-          </v-card-title>
-            <hr>
+        <div
+          class="d-flex justify-center text-h3 my-8"
+          style="overflow-wrap: normal"
+          ><div>{{ items.recipe_name }}</div>
+        </div>
+        <hr />
         <!-- <v-row align="center" class="mx-0">
           <v-rating
             :value="4.5"
@@ -60,23 +62,29 @@
           Edit Recipe
         </v-btn>
 
-        <div class="d-flex justify-space-between my-3">
+        <div
+          class="d-flex justify-space-between flex-wrap my-md-3 my-lg-3 my-xl-3"
+        >
           <div class="my-2"></div>
-
-          <div class="subtitle-1 font-weight-black">Prep time:</div>
-          <div class="subtitle-1">{{ items.prep_time }}</div>
+          <div>
+            <div class="subtitle-1 font-weight-black">Prep time:</div>
+            <div class="subtitle-1">{{ items.prep_time }}</div>
+          </div>
           <div class="my-2"></div>
           <div class="my-2"></div>
           <div class="my-2"></div>
-          <div class="subtitle-1 font-weight-black">Cook time:</div>
-          <div class="subtitle-1">{{ items.cook_time }}</div>
-
+          <div>
+            <div class="subtitle-1 font-weight-black">Cook time:</div>
+            <div class="subtitle-1">{{ items.cook_time }}</div>
+          </div>
           <!-- <div class="my-2"></div> -->
           <div class="my-2"></div>
           <div class="my-2"></div>
           <div class="my-2"></div>
-          <div class="subtitle-1 font-weight-black">Yields:</div>
-          <div class="subtitle-1">{{ items.servings }} servings</div>
+          <div>
+            <div class="subtitle-1 font-weight-black">Yields:</div>
+            <div class="subtitle-1">{{ items.servings }} servings</div>
+          </div>
           <div class="my-2"></div>
         </div>
 
@@ -95,14 +103,22 @@
 
         <v-card-title>Ingredients: </v-card-title>
 
-        <p v-for="ing in items.ingredients_text.split('\r\n')" :key="ing" class="px-7 font-weight-medium">
+        <p
+          v-for="ing in items.ingredients_text.split('\r\n')"
+          :key="ing"
+          class="px-7 font-weight-medium"
+        >
           {{ ing }}
         </p>
 
         <v-divider class="mx-4"></v-divider>
 
         <v-card-title>Directions: </v-card-title>
-        <p v-for="dir in items.recipe_steps.split('\r\n')" :key="dir" class="pl-7 pr-9 font-weight-medium">
+        <p
+          v-for="dir in items.recipe_steps.split('\r\n')"
+          :key="dir"
+          class="pl-7 pr-9 font-weight-medium"
+        >
           {{ dir }}
         </p>
       </v-card-text>
